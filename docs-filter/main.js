@@ -41,7 +41,7 @@ module.exports = "thead th{\r\n  color: #3192a1;\r\n}\r\n\r\ntbody td{\r\n  colo
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"card\">\r\n    <div class=\"card-header\">\r\n        {{pageTitle}}\r\n    </div>\r\n    <div class=\"card-body\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-2\">Filter By</div>\r\n            <div class=\"col-md-4\">\r\n                <input type='text'\r\n                [(ngModel)]='listFilter' />\r\n            </div>\r\n        </div>\r\n        <div class=\"row mt-3\">\r\n            <div class=\"col-md-6\">\r\n                <h4>Filterd by: {{listFilter}}</h4>\r\n            </div>\r\n        </div>\r\n        <div class=\"table-responsive\">\r\n            <table class=\"table\" *ngIf=\"albums && albums.length\">\r\n                <thead>\r\n                    <tr>\r\n                        <th>\r\n                            <button class=\"btn btn-info\"\r\n                                    (click)=\"toggleImage()\">\r\n                                    {{isImageShow ? 'Hide Image' : 'Show Image'}}\r\n                            </button>\r\n                        </th>\r\n                        <th>Album name</th>\r\n                        <th>Artist</th>\r\n                        <th>Genre</th>\r\n                        <th>Release Date</th>\r\n                        <th>price</th>\r\n                        <th>Rating</th>\r\n                    </tr>\r\n                </thead>\r\n                <tbody>\r\n                  <tr *ngFor=\"let album of filteredAlbums\">\r\n                    <td  class=\"align-middle\">\r\n                      <img *ngIf=isImageShow\r\n                        [title]=\"album.albumName | uppercase\"\r\n                        [src]=\"album.image\"\r\n                        [style.width.px]=\"imageWidth\"/></td>\r\n                    <td class=\"align-middle\">{{album.albumName}}</td>\r\n                    <td class=\"align-middle\">{{album.artist}}</td>\r\n                    <td class=\"align-middle\">{{album.genre}}</td>\r\n                    <td class=\"align-middle\">{{album.releaseDate | date}}</td>\r\n                    <td class=\"align-middle\">{{album.price | currency | lowercase}} ({{album.price | convertPriceToText: 15}})</td>\r\n                    <td class=\"align-middle\"><fma-rating [rating]='album.rating'></fma-rating></td>\r\n                  </tr>\r\n                </tbody>\r\n            </table>\r\n        </div>\r\n    </div>\r\n  </div>\r\n"
+module.exports = "<div class=\"card\">\r\n    <div class=\"card-header\">\r\n        {{pageTitle}}\r\n    </div>\r\n    <div class=\"card-body\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-2\">Filter By</div>\r\n            <div class=\"col-md-4\">\r\n                <input type='text'\r\n                [(ngModel)]='listFilter' />\r\n            </div>\r\n        </div>\r\n        <div class=\"row mt-3\">\r\n            <div class=\"col-md-6\">\r\n                <h4>Filterd by: {{listFilter}}</h4>\r\n            </div>\r\n        </div>\r\n        <div class=\"table-responsive\">\r\n            <table class=\"table\" *ngIf=\"albums && albums.length\">\r\n                <thead>\r\n                    <tr>\r\n                        <th>\r\n                            <button class=\"btn btn-info\"\r\n                                    (click)=\"toggleImage()\">\r\n                                    {{isImageShow ? 'Hide Image' : 'Show Image'}}\r\n                            </button>\r\n                        </th>\r\n                        <th>Album name</th>\r\n                        <th>Artist</th>\r\n                        <th>Genre</th>\r\n                        <th>Release Date</th>\r\n                        <th>price</th>\r\n                        <th>Rating</th>\r\n                    </tr>\r\n                </thead>\r\n                <tbody>\r\n                  <tr *ngFor=\"let album of filteredAlbums\">\r\n                    <td  class=\"align-middle\">\r\n                      <img *ngIf=isImageShow\r\n                        [title]=\"album.albumName | uppercase\"\r\n                        [src]=\"album.image\"\r\n                        [style.width.px]=\"imageWidth\"/></td>\r\n                    <td class=\"align-middle\">{{album.albumName}}</td>\r\n                    <td class=\"align-middle\">{{album.artist}}</td>\r\n                    <td class=\"align-middle\">{{album.genre}}</td>\r\n                    <td class=\"align-middle\">{{album.releaseDate | date}}</td>\r\n                    <td class=\"align-middle\">{{album.price | currency | lowercase}} ({{album.price | convertPriceToText: 15}})</td>\r\n                    <td class=\"align-middle\">{{album.rating}}</td>\r\n                  </tr>\r\n                </tbody>\r\n            </table>\r\n        </div>\r\n    </div>\r\n  </div>\r\n"
 
 /***/ }),
 
@@ -79,7 +79,7 @@ var AlbumListComponent = /** @class */ (function () {
                 "genre": "demo genre",
                 "releaseDate": "April 1, 1978",
                 "price": 10,
-                "rating": 2,
+                "rating": 4.7,
                 "image": "https://upload.wikimedia.org/wikipedia/en/a/a7/Random_Access_Memories.jpg"
             },
             {
@@ -89,7 +89,7 @@ var AlbumListComponent = /** @class */ (function () {
                 "genre": "demo genre",
                 "releaseDate": "April 1, 1978",
                 "price": 12,
-                "rating": 3,
+                "rating": 4,
                 "image": "https://upload.wikimedia.org/wikipedia/en/a/a7/Random_Access_Memories.jpg"
             },
             {
@@ -99,7 +99,7 @@ var AlbumListComponent = /** @class */ (function () {
                 "genre": "demo genre",
                 "releaseDate": "April 1, 1978",
                 "price": 11,
-                "rating": 3.5,
+                "rating": 5,
                 "image": "https://upload.wikimedia.org/wikipedia/en/a/a7/Random_Access_Memories.jpg"
             },
             {
@@ -109,7 +109,7 @@ var AlbumListComponent = /** @class */ (function () {
                 "genre": "demo genre",
                 "releaseDate": "April 1, 1978",
                 "price": 9,
-                "rating": 5,
+                "rating": 3.8,
                 "image": "https://upload.wikimedia.org/wikipedia/en/a/a7/Random_Access_Memories.jpg"
             },
             {
@@ -119,20 +119,22 @@ var AlbumListComponent = /** @class */ (function () {
                 "genre": "demo genre",
                 "releaseDate": "April 1, 1978",
                 "price": 30,
-                "rating": 4.7,
+                "rating": 4.9,
                 "image": "https://upload.wikimedia.org/wikipedia/en/a/a7/Random_Access_Memories.jpg"
             }
         ];
         this.filteredAlbums = this.albums;
-        this.listFilter = '';
+        this.listFilter = 'random';
     }
     Object.defineProperty(AlbumListComponent.prototype, "listFilter", {
         get: function () {
+            console.log("this._listFilter", this._listFilter);
             return this._listFilter;
         },
         set: function (value) {
             this._listFilter = value;
             this.filteredAlbums = this.listFilter ? this.performFilter(this.listFilter) : this.albums;
+            console.log("this._listFilter", this._listFilter);
         },
         enumerable: true,
         configurable: true
@@ -264,14 +266,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
 /* harmony import */ var _albums_album_list_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./albums/album-list.component */ "./src/app/albums/album-list.component.ts");
 /* harmony import */ var _shared_convert_price_to_text_pipe__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./shared/convert-price-to-text.pipe */ "./src/app/shared/convert-price-to-text.pipe.ts");
-/* harmony import */ var _shared_rating_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./shared/rating.component */ "./src/app/shared/rating.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-
 
 
 
@@ -287,8 +287,7 @@ var AppModule = /** @class */ (function () {
             declarations: [
                 _app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"],
                 _albums_album_list_component__WEBPACK_IMPORTED_MODULE_5__["AlbumListComponent"],
-                _shared_convert_price_to_text_pipe__WEBPACK_IMPORTED_MODULE_6__["ConvertPriceToTextPipe"],
-                _shared_rating_component__WEBPACK_IMPORTED_MODULE_7__["RatingComponent"]
+                _shared_convert_price_to_text_pipe__WEBPACK_IMPORTED_MODULE_6__["ConvertPriceToTextPipe"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
@@ -328,6 +327,7 @@ var ConvertPriceToTextPipe = /** @class */ (function () {
     function ConvertPriceToTextPipe() {
     }
     ConvertPriceToTextPipe.prototype.transform = function (value, target) {
+        console.log(value);
         return value > target ? 'expensive price' : 'good price';
     };
     ConvertPriceToTextPipe = __decorate([
@@ -336,81 +336,6 @@ var ConvertPriceToTextPipe = /** @class */ (function () {
         })
     ], ConvertPriceToTextPipe);
     return ConvertPriceToTextPipe;
-}());
-
-
-
-/***/ }),
-
-/***/ "./src/app/shared/rating.component.css":
-/*!*********************************************!*\
-  !*** ./src/app/shared/rating.component.css ***!
-  \*********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = ".crop {\r\n  overflow: hidden;\r\n}\r\ndiv {\r\n  cursor: pointer;\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvc2hhcmVkL3JhdGluZy5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsaUJBQWlCO0NBQ2xCO0FBQ0Q7RUFDRSxnQkFBZ0I7Q0FDakIiLCJmaWxlIjoic3JjL2FwcC9zaGFyZWQvcmF0aW5nLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuY3JvcCB7XHJcbiAgb3ZlcmZsb3c6IGhpZGRlbjtcclxufVxyXG5kaXYge1xyXG4gIGN1cnNvcjogcG9pbnRlcjtcclxufVxyXG4iXX0= */"
-
-/***/ }),
-
-/***/ "./src/app/shared/rating.component.html":
-/*!**********************************************!*\
-  !*** ./src/app/shared/rating.component.html ***!
-  \**********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"crop\"\r\n  [style.width.px]=\"starWidth\"\r\n  [title]=\"rating\">\r\n  <div style=\"width: 80px\">\r\n    <span class=\"fa fa-star\"></span>\r\n    <span class=\"fa fa-star\"></span>\r\n    <span class=\"fa fa-star\"></span>\r\n    <span class=\"fa fa-star\"></span>\r\n    <span class=\"fa fa-star\"></span>\r\n  </div>\r\n</div>\r\n"
-
-/***/ }),
-
-/***/ "./src/app/shared/rating.component.ts":
-/*!********************************************!*\
-  !*** ./src/app/shared/rating.component.ts ***!
-  \********************************************/
-/*! exports provided: RatingComponent */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RatingComponent", function() { return RatingComponent; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (undefined && undefined.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var RatingComponent = /** @class */ (function () {
-    function RatingComponent() {
-        this.ratingClicked = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
-        // onClick(): void {
-        //   this.ratingClicked.emit(`The rating ${this.rating} was clicked!`);
-        // }
-    }
-    RatingComponent.prototype.ngOnChanges = function () {
-        this.starWidth = this.rating * 75 / 5;
-    };
-    __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
-        __metadata("design:type", Number)
-    ], RatingComponent.prototype, "rating", void 0);
-    __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"])(),
-        __metadata("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"])
-    ], RatingComponent.prototype, "ratingClicked", void 0);
-    RatingComponent = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
-            selector: 'fma-rating',
-            template: __webpack_require__(/*! ./rating.component.html */ "./src/app/shared/rating.component.html"),
-            styles: [__webpack_require__(/*! ./rating.component.css */ "./src/app/shared/rating.component.css")]
-        })
-    ], RatingComponent);
-    return RatingComponent;
 }());
 
 
