@@ -41,7 +41,7 @@ module.exports = "thead th{\r\n  color: #3192a1;\r\n}\r\n\r\ntbody td{\r\n  colo
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"card\">\r\n    <div class=\"card-header\">\r\n        {{pageTitle}}\r\n    </div>\r\n    <div class=\"card-body\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-2\">Filter By</div>\r\n            <div class=\"col-md-4\">\r\n                <input type='text'\r\n                [(ngModel)]='listFilter' />\r\n            </div>\r\n        </div>\r\n        <div class=\"row mt-3\">\r\n            <div class=\"col-md-6\">\r\n                <h4>Filterd by: {{listFilter}}</h4>\r\n            </div>\r\n        </div>\r\n        <div class=\"table-responsive\">\r\n            <table class=\"table\" *ngIf=\"albums && albums.length\">\r\n                <thead>\r\n                    <tr>\r\n                        <th>\r\n                            <button class=\"btn btn-info\"\r\n                                    (click)=\"toggleImage()\">\r\n                                    {{isImageShow ? 'Hide Image' : 'Show Image'}}\r\n                            </button>\r\n                        </th>\r\n                        <th>Album name</th>\r\n                        <th>Artist</th>\r\n                        <th>Genre</th>\r\n                        <th>Release Date</th>\r\n                        <th>price</th>\r\n                        <th>Rating</th>\r\n                    </tr>\r\n                </thead>\r\n                <tbody>\r\n                  <tr *ngFor=\"let album of filteredAlbums\">\r\n                    <td  class=\"align-middle\">\r\n                      <img *ngIf=isImageShow\r\n                        [title]=\"album.albumName | uppercase\"\r\n                        [src]=\"album.image\"\r\n                        [style.width.px]=\"imageWidth\"/></td>\r\n                    <td class=\"align-middle\">{{album.albumName}}</td>\r\n                    <td class=\"align-middle\">{{album.artist}}</td>\r\n                    <td class=\"align-middle\">{{album.genre}}</td>\r\n                    <td class=\"align-middle\">{{album.releaseDate | date}}</td>\r\n                    <td class=\"align-middle\">{{album.price | currency | lowercase}} ({{album.price | convertPriceToText: 15}})</td>\r\n                    <td class=\"align-middle\">{{album.rating}}</td>\r\n                  </tr>\r\n                </tbody>\r\n            </table>\r\n        </div>\r\n    </div>\r\n  </div>\r\n"
+module.exports = "<div class=\"card\">\r\n    <div class=\"card-header\">\r\n        {{pageTitle}}\r\n    </div>\r\n    <div class=\"card-body\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-2\">Filter By</div>\r\n            <div class=\"col-md-4\">\r\n                <input type='text'\r\n                [(ngModel)]='listFilter' />\r\n            </div>\r\n        </div>\r\n        <div class=\"row mt-3\">\r\n            <div class=\"col-md-6\">\r\n                <h4>Filterd by: {{listFilter}}</h4>\r\n            </div>\r\n        </div>\r\n        <div class=\"table-responsive\">\r\n            <table class=\"table\" *ngIf=\"albums && albums.length\">\r\n                <thead>\r\n                    <tr>\r\n                        <th>\r\n                            <button class=\"btn btn-info\"\r\n                                    (click)=\"toggleImage()\">\r\n                                    {{isImageShow ? 'Hide Image' : 'Show Image'}}\r\n                            </button>\r\n                        </th>\r\n                        <th>Album name</th>\r\n                        <th>Artist</th>\r\n                        <th>Genre</th>\r\n                        <th>Release Date</th>\r\n                        <th>price</th>\r\n                        <th>Rating</th>\r\n                    </tr>\r\n                </thead>\r\n                <tbody>\r\n                  <tr *ngFor=\"let album of albums\">\r\n                    <td  class=\"align-middle\">\r\n                      <img *ngIf=isImageShow\r\n                        [title]=\"album.albumName | uppercase\"\r\n                        [src]=\"album.image\"\r\n                        [style.width.px]=\"imageWidth\"/></td>\r\n                    <td class=\"align-middle\">{{album.albumName}}</td>\r\n                    <td class=\"align-middle\">{{album.artist}}</td>\r\n                    <td class=\"align-middle\">{{album.genre}}</td>\r\n                    <td class=\"align-middle\">{{album.releaseDate | date}}</td>\r\n                    <td class=\"align-middle\">{{album.price | currency | lowercase}} ({{album.price | convertPriceToText: 15}})</td>\r\n                    <td class=\"align-middle\">{{album.rating}}</td>\r\n                  </tr>\r\n                </tbody>\r\n            </table>\r\n        </div>\r\n    </div>\r\n  </div>\r\n"
 
 /***/ }),
 
@@ -62,15 +62,13 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-var __metadata = (undefined && undefined.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
 
 var AlbumListComponent = /** @class */ (function () {
     function AlbumListComponent() {
         this.pageTitle = 'Album Music List';
         this.imageWidth = 52;
         this.isImageShow = true;
+        this.listFilter = 'work in progress...';
         this.albums = [
             {
                 "albumId": 1,
@@ -123,28 +121,7 @@ var AlbumListComponent = /** @class */ (function () {
                 "image": "https://upload.wikimedia.org/wikipedia/en/a/a7/Random_Access_Memories.jpg"
             }
         ];
-        this.filteredAlbums = this.albums;
-        this.listFilter = 'random';
     }
-    Object.defineProperty(AlbumListComponent.prototype, "listFilter", {
-        get: function () {
-            console.log("this._listFilter", this._listFilter);
-            return this._listFilter;
-        },
-        set: function (value) {
-            this._listFilter = value;
-            this.filteredAlbums = this.listFilter ? this.performFilter(this.listFilter) : this.albums;
-            console.log("this._listFilter", this._listFilter);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    AlbumListComponent.prototype.performFilter = function (filterBy) {
-        filterBy = filterBy.toLocaleLowerCase();
-        return this.albums.filter(function (album) {
-            return album.albumName.toLocaleLowerCase().indexOf(filterBy) !== -1;
-        });
-    };
     AlbumListComponent.prototype.ngOnInit = function () {
         console.log('Album List Component initiated!!');
     };
@@ -156,8 +133,7 @@ var AlbumListComponent = /** @class */ (function () {
             selector: 'fma-albums',
             template: __webpack_require__(/*! ./album-list.component.html */ "./src/app/albums/album-list.component.html"),
             styles: [__webpack_require__(/*! ./album-list.component.css */ "./src/app/albums/album-list.component.css")],
-        }),
-        __metadata("design:paramtypes", [])
+        })
     ], AlbumListComponent);
     return AlbumListComponent;
 }());
@@ -403,7 +379,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\apps\album-music-app-angular\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! D:\apps\my-dream-app-angular\src\main.ts */"./src/main.ts");
 
 
 /***/ })
