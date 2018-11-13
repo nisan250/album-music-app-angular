@@ -45,7 +45,7 @@
                     <td class="align-middle">{{album.genre}}</td>
                     <td class="align-middle">{{album.releaseDate | date}}</td>
                     <td class="align-middle">{{album.price | currency | lowercase}} ({{album.price | convertPriceToText: 15}})</td>
-                    <td class="align-middle">{{album.rating}}</td>
+                    <td class="align-middle"><fma-rating [rating]='album.rating'></fma-rating></td>
                   </tr>
                 </tbody>
             </table>

@@ -6,12 +6,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AlbumListComponent } from './albums/album-list.component';
 import { ConvertPriceToTextPipe } from './shared/convert-price-to-text.pipe';
+import { RatingComponent } from './shared/rating.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AlbumListComponent,
-    ConvertPriceToTextPipe
+    ConvertPriceToTextPipe,
+    RatingComponent
   ],
   imports: [
     BrowserModule,

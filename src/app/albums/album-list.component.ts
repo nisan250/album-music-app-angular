@@ -15,13 +15,11 @@ export class AlbumListComponent implements OnInit {
   _listFilter: string;
   filteredAlbums: IAlbum[];
   get listFilter(): string {
-    console.log("this._listFilter", this._listFilter);
     return this._listFilter
   }
   set listFilter(value: string) {
     this._listFilter = value;
     this.filteredAlbums = this.listFilter ? this.performFilter(this.listFilter) : this.albums;
-    console.log("this._listFilter", this._listFilter);
   }
 c
   albums: IAlbum[] = [
@@ -32,7 +30,7 @@ c
       "genre": "demo genre",
       "releaseDate": "April 1, 1978",
       "price":10,
-      "rating": 4.7,
+      "rating": 2,
       "image": "https://upload.wikimedia.org/wikipedia/en/a/a7/Random_Access_Memories.jpg"
     },
     {
@@ -42,7 +40,7 @@ c
       "genre": "demo genre",
       "releaseDate": "April 1, 1978",
       "price": 12,
-      "rating": 4,
+      "rating": 3,
       "image": "https://upload.wikimedia.org/wikipedia/en/a/a7/Random_Access_Memories.jpg"
     },
     {
@@ -52,7 +50,7 @@ c
       "genre": "demo genre",
       "releaseDate": "April 1, 1978",
       "price": 11,
-      "rating": 5,
+      "rating": 3.5,
       "image": "https://upload.wikimedia.org/wikipedia/en/a/a7/Random_Access_Memories.jpg"
     },
     {
@@ -62,7 +60,7 @@ c
       "genre": "demo genre",
       "releaseDate": "April 1, 1978",
       "price": 9,
-      "rating": 3.8,
+      "rating": 5,
       "image": "https://upload.wikimedia.org/wikipedia/en/a/a7/Random_Access_Memories.jpg"
     },
     {
@@ -72,14 +70,14 @@ c
       "genre": "demo genre",
       "releaseDate": "April 1, 1978",
       "price": 30,
-      "rating": 4.9,
+      "rating": 4.7,
       "image": "https://upload.wikimedia.org/wikipedia/en/a/a7/Random_Access_Memories.jpg"
     }
   ];
 
   constructor() {
     this.filteredAlbums = this.albums;
-    this.listFilter = 'random'
+    this.listFilter = ''
   }
   performFilter(filterBy: string): IAlbum[] {
     filterBy = filterBy.toLocaleLowerCase();
