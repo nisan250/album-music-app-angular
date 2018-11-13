@@ -1,0 +1,54 @@
+<div class="card">
+    <div class="card-header">
+        {{pageTitle}}
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-2">Filter By</div>
+            <div class="col-md-4">
+                <input type='text'
+                [(ngModel)]='listFilter' />
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-6">
+                <h4>Filterd by: {{listFilter}}</h4>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table" *ngIf="albums && albums.length">
+                <thead>
+                    <tr>
+                        <th>
+                            <button class="btn btn-info"
+                                    (click)="toggleImage()">
+                                    {{isImageShow ? 'Hide Image' : 'Show Image'}}
+                            </button>
+                        </th>
+                        <th>Album name</th>
+                        <th>Artist</th>
+                        <th>Genre</th>
+                        <th>Release Date</th>
+                        <th>price</th>
+                        <th>Rating</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let album of albums">
+                    <td  class="align-middle">
+                      <img *ngIf=isImageShow
+                        [title]="album.albumName | uppercase"
+                        [src]="album.image"
+                        [style.width.px]="imageWidth"/></td>
+                    <td class="align-middle">{{album.albumName}}</td>
+                    <td class="align-middle">{{album.artist}}</td>
+                    <td class="align-middle">{{album.genre}}</td>
+                    <td class="align-middle">{{album.releaseDate | date}}</td>
+                    <td class="align-middle">{{album.price | currency | lowercase}} ({{album.price | convertPriceToText: 15}})</td>
+                    <td class="align-middle">{{album.rating}}</td>
+                  </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+  </div>

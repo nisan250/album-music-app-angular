@@ -1,0 +1,52 @@
+[
+  {
+    "albumId": 1,
+    "albumName": "demo album",
+    "artist" : "demo artist",
+    "genre": "demo genre",
+    "releaseDate": "April 1, 1978",
+    "price":10,
+    "rating": 4.7,
+    "image": "https://upload.wikimedia.org/wikipedia/en/a/a7/Random_Access_Memories.jpg"
+  },
+  {
+    "albumId": 2,
+    "albumName": "demo album",
+    "artist" : "demo artist",
+    "genre": "demo genre",
+    "releaseDate": "April 1, 1978",
+    "price": 12,
+    "rating": 4,
+    "image": "https://upload.wikimedia.org/wikipedia/en/a/a7/Random_Access_Memories.jpg"
+  },
+  {
+    "albumId": 5,
+    "albumName": "demo album",
+    "artist" : "demo artist",
+    "genre": "demo genre",
+    "releaseDate": "April 1, 1978",
+    "price": 11,
+    "rating": 5,
+    "image": "https://upload.wikimedia.org/wikipedia/en/a/a7/Random_Access_Memories.jpg"
+  },
+  {
+    "albumId": 8,
+    "albumName": "demo album",
+    "artist" : "demo artist",
+    "genre": "demo genre",
+    "releaseDate": "April 1, 1978",
+    "price": 9,
+    "rating": 3.8,
+    "image": "https://upload.wikimedia.org/wikipedia/en/a/a7/Random_Access_Memories.jpg"
+  },
+  {
+    "albumId": 10,
+    "albumName": "demo album",
+    "artist" : "demo artist",
+    "genre": "demo genre",
+    "releaseDate": "April 1, 1978",
+    "price": 30,
+    "rating": 4.9,
+    "image": "https://upload.wikimedia.org/wikipedia/en/a/a7/Random_Access_Memories.jpg"
+  }
+]
