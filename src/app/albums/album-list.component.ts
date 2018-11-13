@@ -10,7 +10,20 @@ export class AlbumListComponent implements OnInit {
   pageTitle: string = 'Album Music List';
   imageWidth: number = 52;
   isImageShow: boolean = true;
-  listFilter: string = 'work in progress...';
+  // listFilter: string = 'work in progress...';
+
+  _listFilter: string;
+  filteredAlbums: IAlbum[];
+  get listFilter(): string {
+    console.log("this._listFilter", this._listFilter);
+    return this._listFilter
+  }
+  set listFilter(value: string) {
+    this._listFilter = value;
+    this.filteredAlbums = this.listFilter ? this.performFilter(this.listFilter) : this.albums;
+    console.log("this._listFilter", this._listFilter);
+  }
+c
   albums: IAlbum[] = [
     {
       "albumId": 1,
@@ -64,6 +77,15 @@ export class AlbumListComponent implements OnInit {
     }
   ];
 
+  constructor() {
+    this.filteredAlbums = this.albums;
+    this.listFilter = 'random'
+  }
+  performFilter(filterBy: string): IAlbum[] {
+    filterBy = filterBy.toLocaleLowerCase();
+    return this.albums.filter((album: IAlbum) =>
+        album.albumName.toLocaleLowerCase().indexOf(filterBy) !== -1);
+  }
   ngOnInit(): void {
     console.log('Album List Component initiated!!');
   }
