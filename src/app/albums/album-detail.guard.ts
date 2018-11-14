@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class ProductDetailGuard implements CanActivate {
+export class AlbumDetailGuard implements CanActivate {
 
   constructor(private router: Router) { }
 
@@ -14,8 +14,8 @@ export class ProductDetailGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     let id = +next.url[1].path;
     if (isNaN(id) || id < 1) {
-      alert('Invalid product Id');
-      this.router.navigate(['/products']);
+      alert('Invalid album Id');
+      this.router.navigate(['/albums']);
       return false;
     }
     return true;
