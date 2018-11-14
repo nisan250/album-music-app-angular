@@ -16,7 +16,7 @@ export class RatingComponent implements OnChanges{
     this.starWidth = this.rating * 75 / 5;
   }
 
-  // onClick(): void {
-  //   this.ratingClicked.emit(`The rating ${this.rating} was clicked!`);
-  // }
+  onClick(): void {
+    this.ratingClicked.emit(`you clicked the rating: ${this.rating} `);
+  }
 }

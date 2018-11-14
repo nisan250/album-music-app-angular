@@ -1,12 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { IAlbum } from './album.component';
+import { AlbumService } from './album.service';
 
 @Component({
   selector: 'fma-albums',
   templateUrl: './album-list.component.html',
   styleUrls: ['./album-list.component.css'],
+  // providers: [AlbumService]
+  // we dont have to add the provider here because the albumService is already registerd
 })
 export class AlbumListComponent implements OnInit {
+  //no need for _private, with the private in the parameter constructor , typescript do for us automaticaly
+  //private _albumService;
+  constructor(private albumService: AlbumService) {
+    //this._albumService = albumService;
+    // this.listFilter =  ''
+  }
+
+  albums: IAlbum[];
   pageTitle: string = 'Album Music List';
   imageWidth: number = 52;
   isImageShow: boolean = true;
@@ -21,71 +32,22 @@ export class AlbumListComponent implements OnInit {
     this._listFilter = value;
     this.filteredAlbums = this.listFilter ? this.performFilter(this.listFilter) : this.albums;
   }
-c
-  albums: IAlbum[] = [
-    {
-      "albumId": 1,
-      "albumName": "demo one",
-      "artist" : "demo artist",
-      "genre": "demo genre",
-      "releaseDate": "April 1, 1978",
-      "price":10,
-      "rating": 2,
-      "image": "https://upload.wikimedia.org/wikipedia/en/a/a7/Random_Access_Memories.jpg"
-    },
-    {
-      "albumId": 2,
-      "albumName": "demo two",
-      "artist" : "demo artist",
-      "genre": "demo genre",
-      "releaseDate": "April 1, 1978",
-      "price": 12,
-      "rating": 3,
-      "image": "https://upload.wikimedia.org/wikipedia/en/a/a7/Random_Access_Memories.jpg"
-    },
-    {
-      "albumId": 5,
-      "albumName": "demo three",
-      "artist" : "demo artist",
-      "genre": "demo genre",
-      "releaseDate": "April 1, 1978",
-      "price": 11,
-      "rating": 3.5,
-      "image": "https://upload.wikimedia.org/wikipedia/en/a/a7/Random_Access_Memories.jpg"
-    },
-    {
-      "albumId": 8,
-      "albumName": "demo four",
-      "artist" : "demo artist",
-      "genre": "demo genre",
-      "releaseDate": "April 1, 1978",
-      "price": 9,
-      "rating": 5,
-      "image": "https://upload.wikimedia.org/wikipedia/en/a/a7/Random_Access_Memories.jpg"
-    },
-    {
-      "albumId": 10,
-      "albumName": "demo five",
-      "artist" : "demo artist",
-      "genre": "demo genre",
-      "releaseDate": "April 1, 1978",
-      "price": 30,
-      "rating": 4.7,
-      "image": "https://upload.wikimedia.org/wikipedia/en/a/a7/Random_Access_Memories.jpg"
-    }
-  ];
 
-  constructor() {
-    this.filteredAlbums = this.albums;
-    this.listFilter = ''
+
+  onRatingClicked (message: string):void {
+    console.log(message);
   }
+
   performFilter(filterBy: string): IAlbum[] {
     filterBy = filterBy.toLocaleLowerCase();
     return this.albums.filter((album: IAlbum) =>
         album.albumName.toLocaleLowerCase().indexOf(filterBy) !== -1);
   }
+
   ngOnInit(): void {
     console.log('Album List Component initiated!!');
+     this.albums = this.albumService.getAlbums();
+     this.filteredAlbums = this.albums;
   }
 
   toggleImage(): void {
