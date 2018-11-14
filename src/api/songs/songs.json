@@ -1,7 +1,7 @@
 [
   {
     "albumId": 1,
-    "albumName": "demo album",
+    "albumName": "demo album one",
     "artist" : "demo artist",
     "genre": "demo genre",
     "releaseDate": "April 1, 1978",
@@ -11,7 +11,7 @@
   },
   {
     "albumId": 2,
-    "albumName": "demo album",
+    "albumName": "demo album two",
     "artist" : "demo artist",
     "genre": "demo genre",
     "releaseDate": "April 1, 1978",
@@ -21,7 +21,7 @@
   },
   {
     "albumId": 5,
-    "albumName": "demo album",
+    "albumName": "demo album three",
     "artist" : "demo artist",
     "genre": "demo genre",
     "releaseDate": "April 1, 1978",
@@ -31,7 +31,7 @@
   },
   {
     "albumId": 8,
-    "albumName": "demo album",
+    "albumName": "demo album four",
     "artist" : "demo artist",
     "genre": "demo genre",
     "releaseDate": "April 1, 1978",
@@ -41,7 +41,7 @@
   },
   {
     "albumId": 10,
-    "albumName": "demo album",
+    "albumName": "demo album five",
     "artist" : "demo artist",
     "genre": "demo genre",
     "releaseDate": "April 1, 1978",
