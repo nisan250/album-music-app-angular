@@ -21,6 +21,8 @@ export class AlbumListComponent implements OnInit {
   pageTitle: string = 'Album Music List';
   imageWidth: number = 52;
   isImageShow: boolean = true;
+  errorMessage: string;
+
   // listFilter: string = 'work in progress...';
 
   _listFilter: string;
@@ -46,8 +48,15 @@ export class AlbumListComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('Album List Component initiated!!');
-     this.albums = this.albumService.getAlbums();
-     this.filteredAlbums = this.albums;
+    this.albumService.getAlbums().subscribe(
+      albums => {
+        this.albums = albums;
+        this.filteredAlbums = this.albums;
+      },
+      error => this.errorMessage = <any>error
+
+    )
+
   }
 
   toggleImage(): void {

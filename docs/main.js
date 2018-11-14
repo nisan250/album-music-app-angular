@@ -100,9 +100,12 @@ var AlbumListComponent = /** @class */ (function () {
         });
     };
     AlbumListComponent.prototype.ngOnInit = function () {
+        var _this = this;
         console.log('Album List Component initiated!!');
-        this.albums = this.albumService.getAlbums();
-        this.filteredAlbums = this.albums;
+        this.albumService.getAlbums().subscribe(function (albums) {
+            _this.albums = albums;
+            _this.filteredAlbums = _this.albums;
+        }, function (error) { return _this.errorMessage = error; });
     };
     AlbumListComponent.prototype.toggleImage = function () {
         this.isImageShow = !this.isImageShow;
@@ -133,74 +136,49 @@ var AlbumListComponent = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AlbumService", function() { return AlbumService; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
 
 var AlbumService = /** @class */ (function () {
-    function AlbumService() {
+    function AlbumService(http) {
+        this.http = http;
+        this.albumUrl = 'api/songs/songs.json';
     }
     AlbumService.prototype.getAlbums = function () {
-        return [
-            {
-                "albumId": 1,
-                "albumName": "demo one",
-                "artist": "demo artist",
-                "genre": "demo genre",
-                "releaseDate": "April 1, 1978",
-                "price": 10,
-                "rating": 2,
-                "image": "https://upload.wikimedia.org/wikipedia/en/a/a7/Random_Access_Memories.jpg"
-            },
-            {
-                "albumId": 2,
-                "albumName": "demo two",
-                "artist": "demo artist",
-                "genre": "demo genre",
-                "releaseDate": "April 1, 1978",
-                "price": 12,
-                "rating": 3,
-                "image": "https://upload.wikimedia.org/wikipedia/en/a/a7/Random_Access_Memories.jpg"
-            },
-            {
-                "albumId": 5,
-                "albumName": "demo three",
-                "artist": "demo artist",
-                "genre": "demo genre",
-                "releaseDate": "April 1, 1978",
-                "price": 11,
-                "rating": 3.5,
-                "image": "https://upload.wikimedia.org/wikipedia/en/a/a7/Random_Access_Memories.jpg"
-            },
-            {
-                "albumId": 8,
-                "albumName": "demo four",
-                "artist": "demo artist",
-                "genre": "demo genre",
-                "releaseDate": "April 1, 1978",
-                "price": 9,
-                "rating": 5,
-                "image": "https://upload.wikimedia.org/wikipedia/en/a/a7/Random_Access_Memories.jpg"
-            },
-            {
-                "albumId": 10,
-                "albumName": "demo five",
-                "artist": "demo artist",
-                "genre": "demo genre",
-                "releaseDate": "April 1, 1978",
-                "price": 30,
-                "rating": 4.7,
-                "image": "https://upload.wikimedia.org/wikipedia/en/a/a7/Random_Access_Memories.jpg"
-            }
-        ];
+        // return this.http.get<IAlbum[]>(this.albumUrl);
+        return this.http.get(this.albumUrl).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (data) { return console.log(JSON.stringify(data)); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    };
+    AlbumService.prototype.handleError = function (err) {
+        var errorMessage = '';
+        if (err.error instanceof ErrorEvent) {
+            //client-side or network error
+            errorMessage = "error  " + err.error.message;
+        }
+        else {
+            //backend error with response code
+            errorMessage = "error " + err.error.message;
+        }
+        console.error(errorMessage);
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])(errorMessage);
     };
     AlbumService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
             providedIn: 'root'
-        })
+        }),
+        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
     ], AlbumService);
     return AlbumService;
 }());
@@ -305,11 +283,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm5/platform-browser.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
-/* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./app-routing.module */ "./src/app/app-routing.module.ts");
-/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
-/* harmony import */ var _albums_album_list_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./albums/album-list.component */ "./src/app/albums/album-list.component.ts");
-/* harmony import */ var _shared_convert_price_to_text_pipe__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./shared/convert-price-to-text.pipe */ "./src/app/shared/convert-price-to-text.pipe.ts");
-/* harmony import */ var _shared_rating_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./shared/rating.component */ "./src/app/shared/rating.component.ts");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./app-routing.module */ "./src/app/app-routing.module.ts");
+/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
+/* harmony import */ var _albums_album_list_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./albums/album-list.component */ "./src/app/albums/album-list.component.ts");
+/* harmony import */ var _shared_convert_price_to_text_pipe__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./shared/convert-price-to-text.pipe */ "./src/app/shared/convert-price-to-text.pipe.ts");
+/* harmony import */ var _shared_rating_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./shared/rating.component */ "./src/app/shared/rating.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -324,24 +303,26 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
             declarations: [
-                _app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"],
-                _albums_album_list_component__WEBPACK_IMPORTED_MODULE_5__["AlbumListComponent"],
-                _shared_convert_price_to_text_pipe__WEBPACK_IMPORTED_MODULE_6__["ConvertPriceToTextPipe"],
-                _shared_rating_component__WEBPACK_IMPORTED_MODULE_7__["RatingComponent"]
+                _app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"],
+                _albums_album_list_component__WEBPACK_IMPORTED_MODULE_6__["AlbumListComponent"],
+                _shared_convert_price_to_text_pipe__WEBPACK_IMPORTED_MODULE_7__["ConvertPriceToTextPipe"],
+                _shared_rating_component__WEBPACK_IMPORTED_MODULE_8__["RatingComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
-                _app_routing_module__WEBPACK_IMPORTED_MODULE_3__["AppRoutingModule"],
-                _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"]
+                _app_routing_module__WEBPACK_IMPORTED_MODULE_4__["AppRoutingModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"],
+                _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClientModule"]
             ],
             providers: [],
-            bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"]]
+            bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"]]
         })
     ], AppModule);
     return AppModule;
