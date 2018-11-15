@@ -32,7 +32,9 @@ import { AlbumDetailComponent } from './albums/album-detail.component';
       { path: 'home', component: HomeComponent },
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: '**', redirectTo: 'home', pathMatch: 'full' },
-    ], { useHash: true})
+    ]
+    // , { useHash: true}
+    )
   ],
   providers: [],
   bootstrap: [AppComponent]
