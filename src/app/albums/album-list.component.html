@@ -40,7 +40,7 @@
                         [title]="album.albumName | uppercase"
                         [src]="album.image"
                         [style.width.px]="imageWidth"/></td>
-                    <td class="align-middle">{{album.albumName}}</td>
+                    <td class="align-middle"><a [routerLink]="['/albums', album.albumId]">{{album.albumName}}</a></td>
                     <td class="align-middle">{{album.artist}}</td>
                     <td class="align-middle">{{album.genre}}</td>
                     <td class="align-middle">{{album.releaseDate | date}}</td>

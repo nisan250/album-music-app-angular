@@ -2,31 +2,33 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { IAlbum } from './album.component';
-
+import { AlbumService } from './album.service';
 @Component({
   templateUrl: './album-detail.component.html',
   styleUrls: ['./album-detail.component.css']
 })
 export class AlbumDetailComponent implements OnInit {
   pageTitle: string = 'Album Detail';
-  album: IAlbum;
+  errorMessage = '';
+  album: IAlbum | undefined;
 
   constructor(private route: ActivatedRoute,
-              private router: Router) { }
+              private router: Router,
+              private albumService: AlbumService) { }
 
   ngOnInit() {
-    let id = +this.route.snapshot.paramMap.get('id');
-    this.pageTitle += `: ${id}`;
-    this.album = {
-      "albumId": 10,
-      "albumName": "demo album six",
-      "artist" : "demo artist",
-      "genre": "demo genre",
-      "releaseDate": "April 1, 1111",
-      "price": 30,
-      "rating": 4.9,
-      "image": "https://upload.wikimedia.org/wikipedia/en/a/a7/Random_Access_Memories.jpg"
-    };
+    const param = +this.route.snapshot.paramMap.get('id');
+
+    if(param) {
+      const id = +param;
+      this.getAlbum(id);
+    }
+  }
+
+  getAlbum(id: number) {
+    this.albumService.getAlbum(id).subscribe(
+      album => this.album = album,
+      error => this.errorMessage = <any>error);
   }
 
   onBack(): void {

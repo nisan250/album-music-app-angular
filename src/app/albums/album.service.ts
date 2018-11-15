@@ -1,10 +1,9 @@
-
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { tap, catchError } from 'rxjs/operators';
-import { IAlbum } from './album.component';
+import { tap, catchError, map } from 'rxjs/operators';
 
+import { IAlbum } from './album.component';
 @Injectable({
   providedIn: 'root'
 })
@@ -18,6 +17,12 @@ export class AlbumService {
     return this.http.get<IAlbum[]>(this.albumUrl).pipe(
       tap(data => console.log(JSON.stringify(data))),
       catchError(this.handleError)
+    );
+  }
+
+  getAlbum(id: number): Observable<IAlbum | undefined> {
+    return this.getAlbums().pipe(
+      map((products: IAlbum[]) => products.find(p => p.albumId === id))
     );
   }
 

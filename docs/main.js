@@ -41,7 +41,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class='card' *ngIf='album'>\n  <div class='card-header'>\n      {{pageTitle + ':  ' + album.albumName}}\n  </div>\n  <div class='card-footer'>\n    <button class='btn btn-outline-secondary'\n            (click)='onBack()'\n            style='width:80px'>\n      <i class='fa fa-chevron-left'></i> Back\n    </button>\n  </div>\n</div>\n"
+module.exports = "<div class='card' *ngIf='album'>\n    <div class='card-header'>\n        {{pageTitle + ':  ' + album.albumName}}\n    </div>\n    <div class='card-body d-flex flex-column m-auto'>\n      <div class=\"mb-4\">\n        <img\n        [title]=\"album.albumName | uppercase\"\n        [src]=\"album.image\"/>\n      </div>\n      <div class=\"row\"><span class=\"col\">Album name:</span><span class=\"col\">{{album.albumName}}</span></div>\n      <div class=\"row\"><span class=\"col\">Artist:</span><span class=\"col\">{{album.artist}}</span></div>\n      <div class=\"row\"><span class=\"col\">Genre:</span><span class=\"col\">{{album.genre}}</span></div>\n      <div class=\"row\"><span class=\"col\">Release Date:</span><span class=\"col\">{{album.releaseDate | date}}</span></div>\n      <div class=\"row\"><span class=\"col\">price:</span><span class=\"col\">{{album.price | currency | lowercase}}</span></div>\n      <div class=\"row\"><span class=\"col\">Rating:</span><span class=\"col\"><fma-rating [rating]='album.rating'></fma-rating></span></div>\n    </div>\n    <div class='card-footer'>\n      <button class='btn btn-outline-secondary'\n              (click)='onBack()'\n              style='width:80px'>\n        <i class='fa fa-chevron-left'></i> Back\n      </button>\n    </div>\n  </div>\n\n\n\n\n"
 
 /***/ }),
 
@@ -57,6 +57,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AlbumDetailComponent", function() { return AlbumDetailComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _album_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./album.service */ "./src/app/albums/album.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -68,25 +69,25 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
+
 var AlbumDetailComponent = /** @class */ (function () {
-    function AlbumDetailComponent(route, router) {
+    function AlbumDetailComponent(route, router, albumService) {
         this.route = route;
         this.router = router;
+        this.albumService = albumService;
         this.pageTitle = 'Album Detail';
+        this.errorMessage = '';
     }
     AlbumDetailComponent.prototype.ngOnInit = function () {
-        var id = +this.route.snapshot.paramMap.get('id');
-        this.pageTitle += ": " + id;
-        this.album = {
-            "albumId": 10,
-            "albumName": "demo album six",
-            "artist": "demo artist",
-            "genre": "demo genre",
-            "releaseDate": "April 1, 1111",
-            "price": 30,
-            "rating": 4.9,
-            "image": "https://upload.wikimedia.org/wikipedia/en/a/a7/Random_Access_Memories.jpg"
-        };
+        var param = +this.route.snapshot.paramMap.get('id');
+        if (param) {
+            var id = +param;
+            this.getAlbum(id);
+        }
+    };
+    AlbumDetailComponent.prototype.getAlbum = function (id) {
+        var _this = this;
+        this.albumService.getAlbum(id).subscribe(function (album) { return _this.album = album; }, function (error) { return _this.errorMessage = error; });
     };
     AlbumDetailComponent.prototype.onBack = function () {
         this.router.navigate(['/albums']);
@@ -97,9 +98,61 @@ var AlbumDetailComponent = /** @class */ (function () {
             styles: [__webpack_require__(/*! ./album-detail.component.css */ "./src/app/albums/album-detail.component.css")]
         }),
         __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]])
+            _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"],
+            _album_service__WEBPACK_IMPORTED_MODULE_2__["AlbumService"]])
     ], AlbumDetailComponent);
     return AlbumDetailComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/albums/album-detail.guard.ts":
+/*!**********************************************!*\
+  !*** ./src/app/albums/album-detail.guard.ts ***!
+  \**********************************************/
+/*! exports provided: AlbumDetailGuard */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AlbumDetailGuard", function() { return AlbumDetailGuard; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var AlbumDetailGuard = /** @class */ (function () {
+    //adding
+    function AlbumDetailGuard(router) {
+        this.router = router;
+    }
+    AlbumDetailGuard.prototype.canActivate = function (next, state) {
+        //adding
+        var id = +next.url[1].path; //albums/id 0/1
+        if (isNaN(id) || id < 1) {
+            alert('Invalid album Id');
+            this.router.navigate(['/albums']);
+            return false;
+        }
+        return true;
+    };
+    AlbumDetailGuard = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]])
+    ], AlbumDetailGuard);
+    return AlbumDetailGuard;
 }());
 
 
@@ -124,7 +177,7 @@ module.exports = "thead th{\r\n  color: #3192a1;\r\n}\r\n\r\ntbody td{\r\n  colo
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"card\">\r\n    <div class=\"card-header\">\r\n        {{pageTitle}}\r\n    </div>\r\n    <div class=\"card-body\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-2\">Filter By</div>\r\n            <div class=\"col-md-4\">\r\n                <input type='text'\r\n                [(ngModel)]='listFilter' />\r\n            </div>\r\n        </div>\r\n        <div class=\"row mt-3\">\r\n            <div class=\"col-md-6\">\r\n                <h4>Filterd by: {{listFilter}}</h4>\r\n            </div>\r\n        </div>\r\n        <div class=\"table-responsive\">\r\n            <table class=\"table\" *ngIf=\"albums && albums.length\">\r\n                <thead>\r\n                    <tr>\r\n                        <th>\r\n                            <button class=\"btn btn-info\"\r\n                                    (click)=\"toggleImage()\">\r\n                                    {{isImageShow ? 'Hide Image' : 'Show Image'}}\r\n                            </button>\r\n                        </th>\r\n                        <th>Album name</th>\r\n                        <th>Artist</th>\r\n                        <th>Genre</th>\r\n                        <th>Release Date</th>\r\n                        <th>price</th>\r\n                        <th>Rating</th>\r\n                    </tr>\r\n                </thead>\r\n                <tbody>\r\n                  <tr *ngFor=\"let album of filteredAlbums\">\r\n                    <td  class=\"align-middle\">\r\n                      <img *ngIf=isImageShow\r\n                        [title]=\"album.albumName | uppercase\"\r\n                        [src]=\"album.image\"\r\n                        [style.width.px]=\"imageWidth\"/></td>\r\n                    <td class=\"align-middle\">{{album.albumName}}</td>\r\n                    <td class=\"align-middle\">{{album.artist}}</td>\r\n                    <td class=\"align-middle\">{{album.genre}}</td>\r\n                    <td class=\"align-middle\">{{album.releaseDate | date}}</td>\r\n                    <td class=\"align-middle\">{{album.price | currency | lowercase}} ({{album.price | convertPriceToText: 15}})</td>\r\n                    <td class=\"align-middle\"><fma-rating [rating]='album.rating' (ratingClicked)='onRatingClicked($event)'></fma-rating></td>\r\n                  </tr>\r\n                </tbody>\r\n            </table>\r\n        </div>\r\n    </div>\r\n  </div>\r\n"
+module.exports = "<div class=\"card\">\r\n    <div class=\"card-header\">\r\n        {{pageTitle}}\r\n    </div>\r\n    <div class=\"card-body\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-2\">Filter By</div>\r\n            <div class=\"col-md-4\">\r\n                <input type='text'\r\n                [(ngModel)]='listFilter' />\r\n            </div>\r\n        </div>\r\n        <div class=\"row mt-3\">\r\n            <div class=\"col-md-6\">\r\n                <h4>Filterd by: {{listFilter}}</h4>\r\n            </div>\r\n        </div>\r\n        <div class=\"table-responsive\">\r\n            <table class=\"table\" *ngIf=\"albums && albums.length\">\r\n                <thead>\r\n                    <tr>\r\n                        <th>\r\n                            <button class=\"btn btn-info\"\r\n                                    (click)=\"toggleImage()\">\r\n                                    {{isImageShow ? 'Hide Image' : 'Show Image'}}\r\n                            </button>\r\n                        </th>\r\n                        <th>Album name</th>\r\n                        <th>Artist</th>\r\n                        <th>Genre</th>\r\n                        <th>Release Date</th>\r\n                        <th>price</th>\r\n                        <th>Rating</th>\r\n                    </tr>\r\n                </thead>\r\n                <tbody>\r\n                  <tr *ngFor=\"let album of filteredAlbums\">\r\n                    <td  class=\"align-middle\">\r\n                      <img *ngIf=isImageShow\r\n                        [title]=\"album.albumName | uppercase\"\r\n                        [src]=\"album.image\"\r\n                        [style.width.px]=\"imageWidth\"/></td>\r\n                    <td class=\"align-middle\"><a [routerLink]=\"['/albums', album.albumId]\">{{album.albumName}}</a></td>\r\n                    <td class=\"align-middle\">{{album.artist}}</td>\r\n                    <td class=\"align-middle\">{{album.genre}}</td>\r\n                    <td class=\"align-middle\">{{album.releaseDate | date}}</td>\r\n                    <td class=\"align-middle\">{{album.price | currency | lowercase}} ({{album.price | convertPriceToText: 15}})</td>\r\n                    <td class=\"align-middle\"><fma-rating [rating]='album.rating' (ratingClicked)='onRatingClicked($event)'></fma-rating></td>\r\n                  </tr>\r\n                </tbody>\r\n            </table>\r\n        </div>\r\n    </div>\r\n  </div>\r\n"
 
 /***/ }),
 
@@ -244,6 +297,9 @@ var AlbumService = /** @class */ (function () {
         // return this.http.get<IAlbum[]>(this.albumUrl);
         return this.http.get(this.albumUrl).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (data) { return console.log(JSON.stringify(data)); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
     };
+    AlbumService.prototype.getAlbum = function (id) {
+        return this.getAlbums().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (products) { return products.find(function (p) { return p.albumId === id; }); }));
+    };
     AlbumService.prototype.handleError = function (err) {
         var errorMessage = '';
         if (err.error instanceof ErrorEvent) {
@@ -328,6 +384,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _shared_rating_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./shared/rating.component */ "./src/app/shared/rating.component.ts");
 /* harmony import */ var _home_home_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./home/home.component */ "./src/app/home/home.component.ts");
 /* harmony import */ var _albums_album_detail_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./albums/album-detail.component */ "./src/app/albums/album-detail.component.ts");
+/* harmony import */ var _albums_album_detail_guard__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./albums/album-detail.guard */ "./src/app/albums/album-detail.guard.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -339,6 +396,7 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 // import { AppRoutingModule } from './app-routing.module';
+
 
 
 
@@ -365,9 +423,10 @@ var AppModule = /** @class */ (function () {
                 _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"],
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClientModule"],
                 _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterModule"].forRoot([
-                    { path: 'albums', component: _albums_album_list_component__WEBPACK_IMPORTED_MODULE_6__["AlbumListComponent"] },
-                    { path: 'albums/:id', component: _albums_album_detail_component__WEBPACK_IMPORTED_MODULE_10__["AlbumDetailComponent"] },
                     { path: 'home', component: _home_home_component__WEBPACK_IMPORTED_MODULE_9__["HomeComponent"] },
+                    { path: 'albums', component: _albums_album_list_component__WEBPACK_IMPORTED_MODULE_6__["AlbumListComponent"] },
+                    //{ path: 'albums/:id', component: AlbumDetailComponent },
+                    { path: 'albums/:id', canActivate: [_albums_album_detail_guard__WEBPACK_IMPORTED_MODULE_11__["AlbumDetailGuard"]], component: _albums_album_detail_component__WEBPACK_IMPORTED_MODULE_10__["AlbumDetailComponent"] },
                     { path: '', redirectTo: 'home', pathMatch: 'full' },
                     { path: '**', redirectTo: 'home', pathMatch: 'full' },
                 ]

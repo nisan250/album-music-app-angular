@@ -11,6 +11,7 @@ import { ConvertPriceToTextPipe } from './shared/convert-price-to-text.pipe';
 import { RatingComponent } from './shared/rating.component';
 import { HomeComponent } from './home/home.component';
 import { AlbumDetailComponent } from './albums/album-detail.component';
+import { AlbumDetailGuard } from './albums/album-detail.guard';
 
 @NgModule({
   declarations: [
@@ -27,9 +28,10 @@ import { AlbumDetailComponent } from './albums/album-detail.component';
     FormsModule,
     HttpClientModule,
     RouterModule.forRoot([
-      { path: 'albums', component: AlbumListComponent },
-      { path: 'albums/:id', component: AlbumDetailComponent },
       { path: 'home', component: HomeComponent },
+      { path: 'albums', component: AlbumListComponent },
+      //{ path: 'albums/:id', component: AlbumDetailComponent },
+      { path: 'albums/:id', canActivate: [ AlbumDetailGuard ], component: AlbumDetailComponent },
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: '**', redirectTo: 'home', pathMatch: 'full' },
     ]
