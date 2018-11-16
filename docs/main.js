@@ -261,6 +261,53 @@ var AlbumListComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/albums/album-routing.module.ts":
+/*!************************************************!*\
+  !*** ./src/app/albums/album-routing.module.ts ***!
+  \************************************************/
+/*! exports provided: AlbumRoutingModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AlbumRoutingModule", function() { return AlbumRoutingModule; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _album_list_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./album-list.component */ "./src/app/albums/album-list.component.ts");
+/* harmony import */ var _album_detail_guard__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./album-detail.guard */ "./src/app/albums/album-detail.guard.ts");
+/* harmony import */ var _album_detail_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./album-detail.component */ "./src/app/albums/album-detail.component.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+
+
+var routes = [
+    { path: 'albums', component: _album_list_component__WEBPACK_IMPORTED_MODULE_2__["AlbumListComponent"] },
+    //{ path: 'albums/:id', component: AlbumDetailComponent },
+    { path: 'albums/:id', canActivate: [_album_detail_guard__WEBPACK_IMPORTED_MODULE_3__["AlbumDetailGuard"]], component: _album_detail_component__WEBPACK_IMPORTED_MODULE_4__["AlbumDetailComponent"] },
+];
+var AlbumRoutingModule = /** @class */ (function () {
+    function AlbumRoutingModule() {
+    }
+    AlbumRoutingModule = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"])({
+            imports: [_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"].forChild(routes)],
+            exports: [_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"]]
+        })
+    ], AlbumRoutingModule);
+    return AlbumRoutingModule;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/albums/album.module.ts":
 /*!****************************************!*\
   !*** ./src/app/albums/album.module.ts ***!
@@ -274,16 +321,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _album_list_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./album-list.component */ "./src/app/albums/album-list.component.ts");
 /* harmony import */ var _album_detail_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./album-detail.component */ "./src/app/albums/album-detail.component.ts");
-/* harmony import */ var _album_detail_guard__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./album-detail.guard */ "./src/app/albums/album-detail.guard.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _shared_shared_module__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../shared/shared.module */ "./src/app/shared/shared.module.ts");
+/* harmony import */ var _shared_shared_module__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../shared/shared.module */ "./src/app/shared/shared.module.ts");
+/* harmony import */ var _album_routing_module__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./album-routing.module */ "./src/app/albums/album-routing.module.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-
 
 
 
@@ -299,14 +344,8 @@ var AlbumModule = /** @class */ (function () {
                 _album_detail_component__WEBPACK_IMPORTED_MODULE_2__["AlbumDetailComponent"]
             ],
             imports: [
-                _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterModule"].forChild([
-                    { path: 'albums', component: _album_list_component__WEBPACK_IMPORTED_MODULE_1__["AlbumListComponent"] },
-                    //{ path: 'albums/:id', component: AlbumDetailComponent },
-                    { path: 'albums/:id', canActivate: [_album_detail_guard__WEBPACK_IMPORTED_MODULE_3__["AlbumDetailGuard"]], component: _album_detail_component__WEBPACK_IMPORTED_MODULE_2__["AlbumDetailComponent"] },
-                ]
-                // , { useHash: true}
-                ),
-                _shared_shared_module__WEBPACK_IMPORTED_MODULE_5__["SharedModule"],
+                _shared_shared_module__WEBPACK_IMPORTED_MODULE_3__["SharedModule"],
+                _album_routing_module__WEBPACK_IMPORTED_MODULE_4__["AlbumRoutingModule"]
             ]
         })
     ], AlbumModule);
@@ -382,6 +421,49 @@ var AlbumService = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/app-routing.module.ts":
+/*!***************************************!*\
+  !*** ./src/app/app-routing.module.ts ***!
+  \***************************************/
+/*! exports provided: AppRoutingModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppRoutingModule", function() { return AppRoutingModule; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _home_home_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./home/home.component */ "./src/app/home/home.component.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+var routes = [
+    { path: 'home', component: _home_home_component__WEBPACK_IMPORTED_MODULE_2__["HomeComponent"] },
+    { path: '', redirectTo: 'home', pathMatch: 'full' },
+    { path: '**', redirectTo: 'home', pathMatch: 'full' },
+];
+var AppRoutingModule = /** @class */ (function () {
+    function AppRoutingModule() {
+    }
+    AppRoutingModule = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"])({
+            imports: [_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"].forRoot(routes)],
+            exports: [_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"]]
+        })
+    ], AppRoutingModule);
+    return AppRoutingModule;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/app.component.ts":
 /*!**********************************!*\
   !*** ./src/app/app.component.ts ***!
@@ -432,7 +514,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm5/platform-browser.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./app-routing.module */ "./src/app/app-routing.module.ts");
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
 /* harmony import */ var _home_home_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./home/home.component */ "./src/app/home/home.component.ts");
 /* harmony import */ var _albums_album_module__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./albums/album.module */ "./src/app/albums/album.module.ts");
@@ -445,7 +527,6 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
-// import { AppRoutingModule } from './app-routing.module';
 
 
 
@@ -461,16 +542,9 @@ var AppModule = /** @class */ (function () {
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
-                // AppRoutingModule,
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClientModule"],
-                _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouterModule"].forRoot([
-                    { path: 'home', component: _home_home_component__WEBPACK_IMPORTED_MODULE_5__["HomeComponent"] },
-                    { path: '', redirectTo: 'home', pathMatch: 'full' },
-                    { path: '**', redirectTo: 'home', pathMatch: 'full' },
-                ]
-                // , { useHash: true}
-                ),
-                _albums_album_module__WEBPACK_IMPORTED_MODULE_6__["AlbumModule"]
+                _albums_album_module__WEBPACK_IMPORTED_MODULE_6__["AlbumModule"],
+                _app_routing_module__WEBPACK_IMPORTED_MODULE_3__["AppRoutingModule"]
             ],
             providers: [],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"]]
