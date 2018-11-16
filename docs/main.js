@@ -261,6 +261,71 @@ var AlbumListComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/albums/album.module.ts":
+/*!****************************************!*\
+  !*** ./src/app/albums/album.module.ts ***!
+  \****************************************/
+/*! exports provided: AlbumModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AlbumModule", function() { return AlbumModule; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var _album_list_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./album-list.component */ "./src/app/albums/album-list.component.ts");
+/* harmony import */ var _album_detail_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./album-detail.component */ "./src/app/albums/album-detail.component.ts");
+/* harmony import */ var _album_detail_guard__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./album-detail.guard */ "./src/app/albums/album-detail.guard.ts");
+/* harmony import */ var _shared_convert_price_to_text_pipe__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../shared/convert-price-to-text.pipe */ "./src/app/shared/convert-price-to-text.pipe.ts");
+/* harmony import */ var _shared_rating_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../shared/rating.component */ "./src/app/shared/rating.component.ts");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+
+
+
+
+
+
+var AlbumModule = /** @class */ (function () {
+    function AlbumModule() {
+    }
+    AlbumModule = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"])({
+            declarations: [
+                _album_list_component__WEBPACK_IMPORTED_MODULE_2__["AlbumListComponent"],
+                _shared_convert_price_to_text_pipe__WEBPACK_IMPORTED_MODULE_5__["ConvertPriceToTextPipe"],
+                _shared_rating_component__WEBPACK_IMPORTED_MODULE_6__["RatingComponent"],
+                _album_detail_component__WEBPACK_IMPORTED_MODULE_3__["AlbumDetailComponent"]
+            ],
+            imports: [
+                _angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_7__["FormsModule"],
+                _angular_router__WEBPACK_IMPORTED_MODULE_8__["RouterModule"].forChild([
+                    { path: 'albums', component: _album_list_component__WEBPACK_IMPORTED_MODULE_2__["AlbumListComponent"] },
+                    //{ path: 'albums/:id', component: AlbumDetailComponent },
+                    { path: 'albums/:id', canActivate: [_album_detail_guard__WEBPACK_IMPORTED_MODULE_4__["AlbumDetailGuard"]], component: _album_detail_component__WEBPACK_IMPORTED_MODULE_3__["AlbumDetailComponent"] },
+                ]
+                // , { useHash: true}
+                ),
+            ]
+        })
+    ], AlbumModule);
+    return AlbumModule;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/albums/album.service.ts":
 /*!*****************************************!*\
   !*** ./src/app/albums/album.service.ts ***!
@@ -375,16 +440,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppModule", function() { return AppModule; });
 /* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm5/platform-browser.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
-/* harmony import */ var _albums_album_list_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./albums/album-list.component */ "./src/app/albums/album-list.component.ts");
-/* harmony import */ var _shared_convert_price_to_text_pipe__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./shared/convert-price-to-text.pipe */ "./src/app/shared/convert-price-to-text.pipe.ts");
-/* harmony import */ var _shared_rating_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./shared/rating.component */ "./src/app/shared/rating.component.ts");
-/* harmony import */ var _home_home_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./home/home.component */ "./src/app/home/home.component.ts");
-/* harmony import */ var _albums_album_detail_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./albums/album-detail.component */ "./src/app/albums/album-detail.component.ts");
-/* harmony import */ var _albums_album_detail_guard__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./albums/album-detail.guard */ "./src/app/albums/album-detail.guard.ts");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
+/* harmony import */ var _home_home_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./home/home.component */ "./src/app/home/home.component.ts");
+/* harmony import */ var _albums_album_module__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./albums/album.module */ "./src/app/albums/album.module.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -394,12 +454,7 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
-
 // import { AppRoutingModule } from './app-routing.module';
-
-
-
-
 
 
 
@@ -410,31 +465,24 @@ var AppModule = /** @class */ (function () {
     AppModule = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
             declarations: [
-                _app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"],
-                _albums_album_list_component__WEBPACK_IMPORTED_MODULE_6__["AlbumListComponent"],
-                _shared_convert_price_to_text_pipe__WEBPACK_IMPORTED_MODULE_7__["ConvertPriceToTextPipe"],
-                _shared_rating_component__WEBPACK_IMPORTED_MODULE_8__["RatingComponent"],
-                _home_home_component__WEBPACK_IMPORTED_MODULE_9__["HomeComponent"],
-                _albums_album_detail_component__WEBPACK_IMPORTED_MODULE_10__["AlbumDetailComponent"]
+                _app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"],
+                _home_home_component__WEBPACK_IMPORTED_MODULE_5__["HomeComponent"],
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
                 // AppRoutingModule,
-                _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"],
-                _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClientModule"],
-                _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterModule"].forRoot([
-                    { path: 'home', component: _home_home_component__WEBPACK_IMPORTED_MODULE_9__["HomeComponent"] },
-                    { path: 'albums', component: _albums_album_list_component__WEBPACK_IMPORTED_MODULE_6__["AlbumListComponent"] },
-                    //{ path: 'albums/:id', component: AlbumDetailComponent },
-                    { path: 'albums/:id', canActivate: [_albums_album_detail_guard__WEBPACK_IMPORTED_MODULE_11__["AlbumDetailGuard"]], component: _albums_album_detail_component__WEBPACK_IMPORTED_MODULE_10__["AlbumDetailComponent"] },
+                _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClientModule"],
+                _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouterModule"].forRoot([
+                    { path: 'home', component: _home_home_component__WEBPACK_IMPORTED_MODULE_5__["HomeComponent"] },
                     { path: '', redirectTo: 'home', pathMatch: 'full' },
                     { path: '**', redirectTo: 'home', pathMatch: 'full' },
                 ]
                 // , { useHash: true}
-                )
+                ),
+                _albums_album_module__WEBPACK_IMPORTED_MODULE_6__["AlbumModule"]
             ],
             providers: [],
-            bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"]]
+            bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"]]
         })
     ], AppModule);
     return AppModule;
