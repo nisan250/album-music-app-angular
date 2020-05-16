@@ -29,10 +29,10 @@ export class AlbumService {
   private handleError(err: HttpErrorResponse) {
     let errorMessage = '';
     if(err.error instanceof ErrorEvent) {
-      //client-side or network error
+      // client-side or network error
       errorMessage = `error  ${err.error.message}`;
     } else {
-      //backend error with response code
+      // backend error with response code
       errorMessage = `error ${err.error.message}`;
     }
     console.error(errorMessage);
